@@ -4,3 +4,4 @@ from .home import *
 from .upcoming import *
 from .watch_live import *
 from .commentary import *
+version = 1.0

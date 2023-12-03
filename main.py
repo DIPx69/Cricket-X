@@ -71,7 +71,9 @@ async def live_now(message):
    upcoming_button = types.InlineKeyboardButton(text=f'Upcoming', callback_data='upcoming 1')
    keyboard.add(live_button,recent_button,upcoming_button) 
    await bot.send_message(message.chat.id,f"Working",parse_mode="Markdown",reply_markup=keyboard)
-print("Bot Is Online...[Development Branch]")
+
+print("Bot Is Online...")
+
 if __name__ == "__main__":
    keep_alive()
    asyncio.run(bot.polling(non_stop=True))

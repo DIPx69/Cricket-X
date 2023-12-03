@@ -1,6 +1,5 @@
 from flask import Flask,jsonify
 from threading import Thread
-import admin
 import time
 import logging
 app = Flask('')

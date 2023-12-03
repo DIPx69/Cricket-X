@@ -7,6 +7,7 @@ from telebot.async_telebot import *
 from keep_alive import keep_alive
 from telebot import types
 token = os.getenv("token")
+print(token)
 bot = AsyncTeleBot(token)
 @bot.callback_query_handler(func=lambda call: True)
 async def handle_callback_query(call):
@@ -71,9 +72,7 @@ async def live_now(message):
    upcoming_button = types.InlineKeyboardButton(text=f'Upcoming', callback_data='upcoming 1')
    keyboard.add(live_button,recent_button,upcoming_button) 
    await bot.send_message(message.chat.id,f"Working",parse_mode="Markdown",reply_markup=keyboard)
-
-print("Bot Is Online...")
-
+print("Bot Is Online... [ Development Branch ]")
 if __name__ == "__main__":
    keep_alive()
    asyncio.run(bot.polling(non_stop=True))

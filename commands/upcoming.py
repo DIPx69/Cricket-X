@@ -75,11 +75,11 @@ async def upcoming_matches():
      await f.write(json.dumps(matches))
     return matches
 
-async def upcoming_page_list(call,total_page:int):
+async def upcoming_page_list(call,total_page:int,current_page: int):
    keyboard = types.InlineKeyboardMarkup(row_width=4)
    pages = [types.InlineKeyboardButton(text=f"{i}", callback_data=f"upcoming {i}") for i in range(1,total_page+1)]
    keyboard.add(*pages)
-   back = types.InlineKeyboardButton(text='🔙 Back', callback_data='upcoming 1')
+   back = types.InlineKeyboardButton(text='🔙 Back', callback_data=f'upcoming {current_page}')
    keyboard.add(back)
    await bot.edit_message_text(f"Select Your Page Number",call.json["message"]['chat']['id'],call.json["message"]["message_id"],parse_mode="Markdown",reply_markup=keyboard)
 
@@ -114,7 +114,7 @@ async def upcoming_game(call,page_number):
    next_button = types.InlineKeyboardButton(text=f'{next_emoji}',callback_data=f'upcoming {page_number+1}')
    prev_button = types.InlineKeyboardButton(text=f'{prev_emoji}',callback_data=f'upcoming {page_number-1}')
    home_button = types.InlineKeyboardButton(text=f'🔙 Back',callback_data=f'home')
-   switch_page_button = types.InlineKeyboardButton(text=f'{page_number}/{total_page}',callback_data=f'upcoming_pages {total_page}')
+   switch_page_button = types.InlineKeyboardButton(text=f'{page_number}/{total_page}',callback_data=f'upcoming_pages {total_page} {page_number}')
    keyboard.add(prev_button,switch_page_button,next_button)
    keyboard.add(home_button)
    await bot.edit_message_text(text,call.from_user.id,call.message.id, parse_mode="Markdown",reply_markup=keyboard)

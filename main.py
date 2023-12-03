@@ -17,13 +17,15 @@ async def handle_callback_query(call):
      await command.home(call)
    elif call.data.startswith("recent_pages"):
      page_num = int(call.data.split()[1])
-     await command.page_list(call,page_num)
+     current_page_num = int(call.data.split()[2])
+     await command.page_list(call,page_num,current_page_num)
    elif call.data.startswith("recent"):
      page_num = int(call.data.split()[1])
      await command.recent_game(call,page_num)
    elif call.data.startswith("upcoming_pages"):
      page_num = int(call.data.split()[1])
-     await command.upcoming_page_list(call,page_num)
+     current_page_num = int(call.data.split()[2])
+     await command.upcoming_page_list(call,page_num,current_page_num)
    elif call.data.startswith("upcoming"):
      page_num = int(call.data.split()[1])
      await command.upcoming_game(call,page_num)
@@ -69,7 +71,7 @@ async def live_now(message):
    upcoming_button = types.InlineKeyboardButton(text=f'Upcoming', callback_data='upcoming 1')
    keyboard.add(live_button,recent_button,upcoming_button) 
    await bot.send_message(message.chat.id,f"Working",parse_mode="Markdown",reply_markup=keyboard)
-print("Bot Is Online... [Development Branch]")
+print("Bot Is Online...[Development Branch]")
 if __name__ == "__main__":
    keep_alive()
    asyncio.run(bot.polling(non_stop=True))
